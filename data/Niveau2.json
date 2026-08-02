@@ -4,7 +4,7 @@
     "author": "LT8wrage",
     "creators": ["LT8wrage"],
     "verifier": "LT8wrage",
-    "verification": "https://medal.tv/games/geometry-dash/clips/nebAtxlPo1gtoxbmg?invite=cr-MSxRZ3YsNDc3NTc3ODY5",
+    "verification": "",
     "percentToQualify": 100,
     "password": "1234",
     "records": [
@@ -12,7 +12,7 @@
             "user": "LT8wrage",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 240
+            "hz": 144
         }
     ]
 }
