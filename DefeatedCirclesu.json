@@ -1,1 +1,19 @@
 
+{
+    "id": 131351257,
+    "name": "Defeated Circles U",
+    "author": "LT8wrage",
+    "creators": ["LT8wrage"],
+    "verifier": "LT8wrage",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "1234",
+    "records": [
+        {
+            "user": "Adamous256",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
+}
