@@ -1,1 +1,24 @@
-
+{
+    "id": 145157977,
+    "name": "Acropolix Ultra",
+    "author": "Warman210",
+    "creators": ["Warman210"],
+    "verifier": "Warman210",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "",
+    "records": [
+        {
+            "user": "Warman210",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 60
+        },
+        {
+            "user": "Adamous256",
+            "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
+}
