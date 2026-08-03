@@ -126,3 +126,9 @@
 .page-list .meta .editors li a:hover {
     text-decoration: underline;
 }
+.difficulty-face {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
