@@ -13,6 +13,10 @@ const roleIconMap = {
     dev: "code",
     trial: "user-lock",
 };
+function difficultyIcon(difficulty) {
+    if (!difficulty) return null;
+    return `assets/difficulties/${difficulty.toLowerCase().replaceAll(" ", "_")}.png`;
+}
 
 export default {
     components: { Spinner, LevelAuthors },
