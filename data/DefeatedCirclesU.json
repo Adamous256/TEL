@@ -9,17 +9,17 @@
     "percentToQualify": 100,
     "password": "1234",
     "records": [
-        {
+    {
             "user": "LT8wrage",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 144
-        {
+       }
+    {
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
             "percent": 100,
             "hz": 240
-        }
         }
     ]
 }
