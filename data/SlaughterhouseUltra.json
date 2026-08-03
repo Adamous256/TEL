@@ -1,1 +1,23 @@
-
+{
+    "id": 140833838,
+    "name": "Slaughterhouse Ultra",
+    "author": "Adamous256",
+    "creators": ["Adamous256"],
+    "verifier": "Adamous256",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "",
+    "records": [
+        {
+            "user": "Adamous256",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 240
+        },
+        {
+            "user": "AzzerxGD",
+            "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
