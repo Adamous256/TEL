@@ -1,1 +1,19 @@
 
+{
+    "id": 131091310,
+    "name": "Arctic Lights Ultra",
+    "author": "LT8wrage",
+    "creators": ["LT8wrage"],
+    "verifier": "LT8wrage",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "1234",
+    "records": [
+        {
+            "user": "LT8wrage",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
+}
