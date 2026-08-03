@@ -1,3 +1,4 @@
+javascript
 import { store } from "../main.js";
 import { embed } from "../util.js";
 import { score } from "../score.js";
@@ -22,8 +23,15 @@ export default {
         </main>
         <main v-else class="page-list">
             <div class="list-container">
+                <input
+                    type="text"
+                    class="search-box"
+                    v-model="search"
+                    placeholder="Search by level name..."
+                    style="width: 100%; box-sizing: border-box; padding: 8px 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background: transparent; color: inherit;"
+                >
                 <table class="list" v-if="list">
-                    <tr v-for="([level, err], i) in list">
+                    <tr v-for="[[level, err], i] in filteredList">
                         <td class="rank">
                             <p v-if="i + 1 <= 150" class="type-label-lg">#{{ i + 1 }}</p>
                             <p v-else class="type-label-lg">Legacy</p>
@@ -134,9 +142,18 @@ export default {
         selected: 0,
         errors: [],
         roleIconMap,
-        store
+        store,
+        search: "",
     }),
     computed: {
+        filteredList() {
+            const indexed = this.list.map((entry, i) => [entry, i]);
+            const q = this.search.trim().toLowerCase();
+            if (!q) return indexed;
+            return indexed.filter(([[level]]) =>
+                level && level.name.toLowerCase().includes(q)
+            );
+        },
         level() {
             return this.list[this.selected][0];
         },
