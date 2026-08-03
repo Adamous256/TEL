@@ -1,1 +1,30 @@
-
+{
+    "id": 128215800,
+    "name": "Grief Unleashed",
+    "author": "AzzerxGD",
+    "creators": ["Adamous256"],
+    "verifier": "AzzerxGD",
+    "verification": "",
+    "percentToQualify": 100,
+    "password": "",
+    "records": [
+        {
+            "user": "AzzerxGD",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 60
+        },
+        {
+            "user": "Adamous256",
+            "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
+            "percent": 100,
+            "hz": 240 
+        },
+        {
+            "user": "LT8wrage",
+            "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
+            "percent": 100,
+            "hz": 240 
+        }
+    ]
+}
