@@ -8,12 +8,6 @@
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": [
-        {
-            "user": "",
-            "link": "",
-            "percent": ,
-            "hz": 
-        }
-    ]
-}
+    "records": []
+        
+           
