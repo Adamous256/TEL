@@ -8,4 +8,12 @@
     "verification": "",
     "percentToQualify": 100,
     "password": "1234",
-    "records": []
+    "records": [
+       {
+            "user": "Adamous256",
+            "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
+}
