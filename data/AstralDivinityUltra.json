@@ -1,9 +1,9 @@
 {
-    "id": 142021408,
-    "name": "Final Fantasy Ultra",
-    "author": "LT8wrage",
-    "creators": ["LT8wrage"],
-    "verifier": "LT8wrage",
+    "id": 146476519,
+    "name": "Astral Divinity Ultra",
+    "author": "Adamous256",
+    "creators": ["Adamous256"],
+    "verifier": "PristineFly",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
@@ -14,3 +14,5 @@
             "percent": 100,
             "hz": 240
         }
+    ]
+}
