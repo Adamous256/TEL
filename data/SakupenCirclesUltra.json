@@ -7,7 +7,14 @@
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [
+        {
+            "user": "PristineFly",
+            "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
+            "percent": 100,
+            "hz": 165
+        }
+    ]
 }
 
         
