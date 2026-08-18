@@ -1,8 +1,8 @@
 {
     "id": 147195794,
-    "name": "Defeated Circles U",
+    "name": "Five Nights",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": ["Warman210"],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -14,5 +14,3 @@
             "percent": 100,
             "hz": 240
         }
-    ]
-}
