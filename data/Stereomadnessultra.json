@@ -2,7 +2,9 @@
     "id": 145145027,
     "name": "Stereo Madness Ultra",
     "author": "LT8wrage",
-    "creators": ["RageR"],
+    "creators": [
+        "RageR"
+    ],
     "verifier": "RageR",
     "verification": "",
     "percentToQualify": 100,
@@ -19,6 +21,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "peolee750",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
