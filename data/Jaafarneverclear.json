@@ -2,7 +2,9 @@
     "id": 142978741,
     "name": "Jaafar Never Clear",
     "author": "LT8wrage",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -13,6 +15,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "peolee750",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
