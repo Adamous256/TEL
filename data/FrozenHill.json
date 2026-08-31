@@ -2,7 +2,9 @@
     "id": 145536038,
     "name": "Frozen Hill",
     "author": "Warman210",
-    "creators": ["Warman210"],
+    "creators": [
+        "Warman210"
+    ],
     "verifier": "Warman210",
     "verification": "",
     "percentToQualify": 100,
@@ -25,6 +27,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "arcticreacho7",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
