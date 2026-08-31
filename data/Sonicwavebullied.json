@@ -2,7 +2,9 @@
     "id": 128700298,
     "name": "Sonic Wave Bullied",
     "author": "Adamous256",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "Adamous256",
     "verification": "",
     "percentToQualify": 100,
@@ -19,6 +21,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "PristineFly",
+            "link": "-",
+            "percent": 100,
+            "hz": 165
         }
     ]
 }
