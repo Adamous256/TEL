@@ -2,7 +2,9 @@
     "id": 139916296,
     "name": "Lightwork",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -13,6 +15,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "Warman210",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
