@@ -202,12 +202,3 @@ export default {
         score,
     },
 };
-const difficultyIcons = {
-  "Medium Demon": "assets/medium_demon.png",
-  "Hard Demon": "assets/hard_demon.png",
-  "Insane Demon": "assets/insane_demon.png",
-  "Extreme Demon": "assets/extreme_demon.png",
-};
-const icon = difficultyIcons[level.difficulty] || "";
-const nameHTML = `<img src="${icon}" class="difficulty-icon" alt="${level.difficulty}"> ${level.name}`;
-
