@@ -202,3 +202,15 @@ export default {
         score,
     },
 };
+const difficultyIcons = {
+  "Medium Demon": "assets/medium_demon.png",
+  "Hard Demon": "assets/hard_demon.png",
+  "Insane Demon": "assets/insane_demon.png",
+  "Extreme Demon": "assets/extreme_demon.png",
+  // "Easy Demon": "assets/easy_demon.png",
+};
+
+// là où tu génères le HTML du niveau, par exemple :
+const icon = difficultyIcons[level.difficulty] || "";
+const nameHTML = `<img src="${icon}" class="difficulty-icon" alt="${level.difficulty}"> ${level.name}`;
+
