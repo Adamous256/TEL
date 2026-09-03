@@ -2,10 +2,19 @@
     "id": 1145887800,
     "name": "Cataclysm Ultra",
     "author": "Adamous256",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "Adamous256",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [
+        {
+            "user": "LT8wrage",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
 }
