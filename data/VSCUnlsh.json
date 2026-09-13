@@ -15,6 +15,12 @@
             "link": "-",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "ShabangGd",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
