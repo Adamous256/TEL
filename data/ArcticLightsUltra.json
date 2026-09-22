@@ -1,12 +1,20 @@
-
 {
     "id": 131091310,
     "name": "Arctic Lights Ultra",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
     "password": "1234",
-    "records": []
+    "records": [
+        {
+            "user": "Adamous256",
+            "link": "-",
+            "percent": 100,
+            "hz": 240
+        }
+    ]
 }
