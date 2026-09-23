@@ -34,7 +34,11 @@ export default {
                     style="width: 100%; box-sizing: border-box; padding: 8px 12px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #444; background: transparent; color: inherit;"
                 >
                 <table class="list" v-if="list">
-                    <tr v-for="[[level, err], i] in filteredList">
+                   <template v-for="[[level, err], i] in filteredList" :key="i">
+  <tr v-if="i === 75" class="extended-divider-row">
+    <td colspan="100%" class="extended-divider">— Extended List —</td>
+  </tr>
+  <tr>
                         <td class="rank">
                             <p v-if="i + 1 <= 150" class="type-label-lg">#{{ i + 1 }}</p>
                             <p v-else class="type-label-lg">Legacy</p>
@@ -45,6 +49,7 @@ export default {
                             </button>
                         </td>
                     </tr>
+                  </template>
                 </table>
             </div>
             <div class="level-container">
