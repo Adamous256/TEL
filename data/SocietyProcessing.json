@@ -2,7 +2,9 @@
     "id": 145528574,
     "name": "Society Processing",
     "author": "Warman210",
-    "creators": ["Warman210"],
+    "creators": [
+        "Warman210"
+    ],
     "verifier": "Warman210",
     "verification": "",
     "percentToQualify": 100,
@@ -25,7 +27,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 60
-        } 
+        },
+        {
+            "user": "WokkeyGMD",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
+        }
     ]
 }
-
