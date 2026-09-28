@@ -2,7 +2,9 @@
     "id": 142021408,
     "name": "Final Fantasy Ultra",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -19,6 +21,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 165
+        },
+        {
+            "user": "Warman210",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
