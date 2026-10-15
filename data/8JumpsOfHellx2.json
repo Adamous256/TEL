@@ -9,5 +9,12 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [
+        {
+            "user": "WpopoffFan",
+            "link": "https://youtu.be/0v4ITBlU_4Q first victor",
+            "percent": 100,
+            "hz": 120
+        }
+    ]
 }
