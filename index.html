@@ -105,12 +105,7 @@ th{color:var(--accent);font-weight:500;font-size:14px}
 <script>
 /* ===== EDIT THIS DATA ===== */
 const MAIN_SIZE = 75; // ranks after this appear under "Extended list"
-const LEVELS = [
- {id:146047511,name:"Thinking Space II Ultra",difficulty:"Extreme Demon",creators:["LT8wrage"],verifier:"LT8wrage",video:"dQw4w9WgXcQ",password:"1234",song:"482872",description:"Sample description. Replace it with a sentence or two about the level.",tags:["2.2","Fast-Paced","Wave"],records:[{user:"Player One",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:60}]},
- {id:140833838,name:"Slaughterhouse Ultra",difficulty:"Insane Demon",creators:["Adamous256"],verifier:"Adamous256",video:"dQw4w9WgXcQ",password:"",song:"",description:"",tags:["Ship"],records:[{user:"AzzerxGD",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:60},{user:"Player One",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:144}]},
- {id:100000001,name:"Sample Level Three",difficulty:"Hard Demon",creators:["Creator A","Creator B"],verifier:"Player Two",video:"dQw4w9WgXcQ",password:"",song:"",description:"",tags:[],records:[]},
- {id:100000002,name:"Sample Level Four",difficulty:"Medium Demon",creators:["Creator C"],verifier:"Player One",video:"dQw4w9WgXcQ",password:"free copy",song:"",description:"",tags:["Cube"],records:[{user:"Player Two",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:240}]}
-];
+let LEVELS = []
 /* ========================== */
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
