@@ -1,79 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=1024" />
-        <title>The Easy List</title>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Easy List</title>
+<link rel="icon" href="list_icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#141414;--panel:#1c1c1c;--row:#242424;--line:#333;--text:#f2f2f2;--dim:#9a9a9a;--accent:#1f4fc2;--gold:#ffc857}
+:root[data-theme="light"]{--bg:#f4f4f4;--panel:#fff;--row:#f0eaeb;--line:#ddd;--text:#1a1a1a;--dim:#666}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+a{color:inherit}
+header{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 24px;height:72px;border-bottom:1px solid var(--line);flex:none}
+.brand{font-weight:700;font-size:24px;text-decoration:none;color:var(--accent)}
+nav{display:flex;gap:6px}
+nav a{padding:9px 16px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;color:var(--dim)}
+nav a.on{background:var(--accent);color:#fff}
+nav a:hover:not(.on){color:var(--text)}
+.right{display:flex;gap:10px;justify-content:flex-end;align-items:center}
+.btn{background:var(--accent);color:#fff;padding:9px 16px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.round{border-radius:50%;width:40px;height:40px;padding:0;display:grid;place-items:center;font-size:16px}
+main{flex:1;min-height:0;padding:14px 20px 20px}
+.view{display:none;height:100%}.view.on{display:block}
+#v-list.on{display:grid;grid-template-columns:400px 1fr 340px;gap:14px}
+.card{background:var(--panel);border-radius:14px;overflow:auto;padding:18px}
+.tabs{display:flex;gap:30px;margin-bottom:16px}
+.tabs span{font-size:22px;font-weight:700;padding-bottom:6px;border-bottom:3px solid var(--accent)}
+input[type=search]{width:100%;padding:11px 14px;border-radius:10px;border:0;background:var(--row);color:var(--text);font:inherit;margin-bottom:14px}
+.row{display:flex;gap:14px;align-items:center;width:100%;padding:9px 14px;border:0;background:var(--row);color:inherit;font:inherit;font-weight:500;text-align:left;cursor:pointer;border-radius:6px;margin-bottom:4px}
+.row:hover{filter:brightness(1.15)}
+.row.on{background:var(--accent);color:#fff}
+.rank{width:38px;text-align:right;font-weight:600;flex:none}
+.row.top .rank{color:var(--gold)}.row.on .rank{color:#fff}
+.dif{height:22px;width:auto}
+.divider{display:flex;align-items:center;gap:10px;color:var(--dim);font-weight:600;margin:12px 0}
+.divider::before,.divider::after{content:"";flex:1;border-top:1px dashed var(--line)}
+h1,h2{font-weight:600;font-size:32px;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:12px}
+h2{font-size:28px}
+h1{display:flex;align-items:center;gap:14px}h1 .dif{height:42px}
+.desc{line-height:1.55;margin-bottom:14px;max-width:70ch}
+.video{aspect-ratio:16/9;max-width:740px;border-radius:14px;overflow:hidden;background:#000}
+.video iframe{width:100%;height:100%;border:0}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tags span{border:1px solid var(--line);padding:4px 10px;border-radius:6px;font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);max-width:740px}
+.stats div{text-align:center;padding:14px 8px;font-size:26px;font-weight:600;border-left:1px solid var(--line);border-top:1px solid var(--line);overflow-wrap:anywhere}
+.stats div:nth-child(3n+1){border-left:0}.stats div:nth-child(-n+3){border-top:0}
+.stats span{display:block;font-size:14px;color:var(--accent);font-weight:500;margin-bottom:4px}
+.rec{padding:10px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px}
+.rec small{color:var(--dim)}
+table{border-collapse:collapse;width:100%;max-width:760px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{color:var(--accent);font-weight:500;font-size:14px}
+.page{max-width:780px;margin:0 auto;height:100%}
+.page p,.page li{line-height:1.6;margin-bottom:10px;max-width:70ch}.page ul{padding-left:20px}
+.empty{color:var(--dim);padding:8px 0}
+@media(max-width:1100px){#v-list.on{grid-template-columns:340px 1fr}#recs{display:none}}
+@media(max-width:760px){
+ header{grid-template-columns:1fr auto;height:auto;padding:10px 12px;gap:8px}nav{grid-column:1/-1;order:3;justify-content:center}
+ #v-list.on{grid-template-columns:1fr;grid-template-rows:40vh auto}.stats div{font-size:20px}h1{font-size:26px}
+}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#list">The Easy List</a>
+  <nav>
+    <a href="#list" data-v="list">Demon list</a>
+    <a href="#leaderboard" data-v="leaderboard">Leaderboard</a>
+    <a href="#rules" data-v="rules">Rules</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScPp6rMxPlLm3uTx0dNmcqfecFL34YupZEXIr5eUyl0xDLtRA/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit a record</a>
+  </nav>
+  <div class="right">
+    <button class="btn round" id="theme" aria-label="Toggle light and dark theme">☀</button>
+    <a class="btn" href="https://discord.gg/4RGvmf4Zm9" target="_blank" rel="noopener">Discord</a>
+  </div>
+</header>
+<main>
+  <section class="view" id="v-list">
+    <div class="card" id="side">
+      <div class="tabs"><span>Classic</span></div>
+      <input type="search" id="q" placeholder="Search" aria-label="Search levels">
+      <div id="rows"></div>
+    </div>
+    <div class="card" id="detail"></div>
+    <div class="card" id="recs"></div>
+  </section>
+  <section class="view" id="v-leaderboard"><div class="page card" id="lb"></div></section>
+  <section class="view" id="v-rules"><div class="page card">
+    <h1>Rules</h1>
+    <ul>
+      <li>Complete the level without hacks. FPS bypass is allowed, up to 360 fps.</li>
+      <li>Complete the level listed on the site. Check the level ID before you submit.</li>
+      <li>Include source audio or visible clicks in the video.</li>
+      <li>Show your previous attempt and the full death animation before the completion, unless it is your first attempt.</li>
+    </ul>
+  </div></section>
+</main>
+<script>
+/* ===== EDIT THIS DATA ===== */
+const MAIN_SIZE = 75; // ranks after this appear under "Extended list"
+const LEVELS = [
+ {id:146047511,name:"Thinking Space II Ultra",difficulty:"Extreme Demon",creators:["LT8wrage"],verifier:"LT8wrage",video:"dQw4w9WgXcQ",password:"1234",song:"482872",description:"Sample description. Replace it with a sentence or two about the level.",tags:["2.2","Fast-Paced","Wave"],records:[{user:"Player One",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:60}]},
+ {id:140833838,name:"Slaughterhouse Ultra",difficulty:"Insane Demon",creators:["Adamous256"],verifier:"Adamous256",video:"dQw4w9WgXcQ",password:"",song:"",description:"",tags:["Ship"],records:[{user:"AzzerxGD",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:60},{user:"Player One",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:144}]},
+ {id:100000001,name:"Sample Level Three",difficulty:"Hard Demon",creators:["Creator A","Creator B"],verifier:"Player Two",video:"dQw4w9WgXcQ",password:"",song:"",description:"",tags:[],records:[]},
+ {id:100000002,name:"Sample Level Four",difficulty:"Medium Demon",creators:["Creator C"],verifier:"Player One",video:"dQw4w9WgXcQ",password:"free copy",song:"",description:"",tags:["Cube"],records:[{user:"Player Two",link:"https://www.youtube.com/watch?v=dQw4w9WgXcQ",hz:240}]}
+];
+/* ========================== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const points=r=>Math.max(1,Math.round(500*Math.pow(0.96,r-1)));
+const iconTag=d=>d?`<img class="dif" src="assets/difficulties/${d.toLowerCase().replaceAll(" ","_")}.png" alt="${esc(d)}" onerror="this.remove()">`:"";
+let sel=0;
 
-        <!-- Replace your server icon by uploading an image file named "list_icon.png"-->
-        <link rel="icon" href="list_icon.png" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@500;700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        <link rel="stylesheet" type="text/css" href="css/typography.css" />
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <link rel="stylesheet" type="text/css" href="css/pages/list.css" />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="css/pages/leaderboard.css"
-        />
-        <link rel="stylesheet" type="text/css" href="css/pages/roulette.css" />
-        <link rel="stylesheet" type="text/css" href="css/components/nav.css" />
-        <link rel="stylesheet" type="text/css" href="css/components/btn.css" />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="css/components/tabs.css"
-        />
-        <script src="https://unpkg.com/vue@3.2.31/dist/vue.global.js"></script>
-        <script src="https://unpkg.com/vue-router@4.0.14/dist/vue-router.global.prod.js"></script>
-        <script type="module" src="js/main.js"></script>
-    </head>
-    <body id="app">
-        <header :class="{ dark: store.dark }">
-            <div class="logo">
-                <h2>The Easy List</h2>
-                <p>v1.0.0</p>
-            </div>
-            <nav class="nav">
-                <router-link class="nav__tab" to="/">
-                    <span class="type-label-lg">List</span>
-                </router-link>
-                <router-link class="nav__tab" to="/leaderboard">
-                    <span class="type-label-lg">Leaderboard</span>
-                </router-link>
-                <router-link class="nav__tab" to="/roulette">
-                    <span class="type-label-lg">Roulette</span>
-                </router-link>
-                <div class="nav__actions">
-                    <button
-                        class="nav__icon"
-                        @click.prevent="store.toggleDark()"
-                    >
-                        <img
-                            :src="store.dark ? 'assets/light.svg' : 'assets/dark.svg'"
-                            alt=""
-                        />
-                    </button>
-                    <!-- Replace the '#' with your discord server's invite-->
-                    <a class="nav__icon" href=https://discord.gg/4RGvmf4Zm9>
-                        <img src="assets/discord.svg" alt="Discord Logo" />
-                    </a>
-                    <!-- List record submission form, add a link to replace the '#' when putting a link to your list submission form-->
-                    <a
-                        class="nav__cta type-label-lg"
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScPp6rMxPlLm3uTx0dNmcqfecFL34YupZEXIr5eUyl0xDLtRA/viewform?usp=publish-editor"
-                        target="_blank"
-                        >Submit Record</a
-                    >
-                </div>
-            </nav>
-        </header>
-        <router-view :class="{ dark: store.dark }"></router-view>
-    </body>
+function renderRows(){
+  const q=$("#q").value.trim().toLowerCase(); let h="";
+  LEVELS.forEach((l,i)=>{
+    if(q&&!l.name.toLowerCase().includes(q))return;
+    if(i===MAIN_SIZE&&!q)h+=`<div class="divider">Extended list</div>`;
+    h+=`<button class="row${i===sel?" on":""}${i<3?" top":""}" data-i="${i}"><span class="rank">#${i+1}</span>${iconTag(l.difficulty)}<span>${esc(l.name)}</span></button>`;
+  });
+  $("#rows").innerHTML=h||`<p class="empty">No level matches that name.</p>`;
+}
+function renderDetail(){
+  const l=LEVELS[sel];
+  if(!l){$("#detail").innerHTML=`<p class="empty">Add levels to LEVELS in index.html.</p>`;$("#recs").innerHTML="";return}
+  $("#detail").innerHTML=`<h1>${iconTag(l.difficulty)}${esc(l.name)}</h1>
+  ${l.description?`<p class="desc">${esc(l.description)}</p>`:""}
+  <div class="video"><iframe src="https://www.youtube.com/embed/${esc(l.video)}" title="${esc(l.name)} verification" allowfullscreen loading="lazy"></iframe></div>
+  ${l.tags.length?`<div class="tags">${l.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:`<div class="tags"></div>`}
+  <div class="stats">
+    <div><span>Level ID</span>${esc(l.id)}</div><div><span>List points</span>${points(sel+1)}</div><div><span>Password</span>${esc(l.password||"None")}</div>
+    <div><span>Verifier</span>${esc(l.verifier)}</div><div><span>Creators</span>${l.creators.map(esc).join(", ")}</div><div><span>Song</span>${esc(l.song||"—")}</div>
+  </div>`;
+  $("#recs").innerHTML=l.records.length
+    ?`<h2>Records</h2>`+l.records.map(r=>`<div class="rec"><a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.user)}</a><small>${esc(r.hz)} Hz</small></div>`).join("")
+    :`<h2>No records</h2><p class="empty">Be the first to submit one.</p>`;
+}
+function renderLB(){
+  const t={};
+  LEVELS.forEach((l,i)=>{const p=points(i+1);
+    [l.verifier,...l.records.map(r=>r.user)].forEach(u=>{(t[u]??={pts:0,n:0});t[u].pts+=p;t[u].n++});});
+  const rows=Object.entries(t).sort((a,b)=>b[1].pts-a[1].pts);
+  $("#lb").innerHTML=`<h1>Leaderboard</h1><table><tr><th>#</th><th>Player</th><th>Completions</th><th>Points</th></tr>${rows.map(([u,v],i)=>`<tr><td>${i+1}</td><td>${esc(u)}</td><td>${v.n}</td><td>${v.pts}</td></tr>`).join("")}</table>`;
+}
+function route(){
+  const v=location.hash.slice(1)||"list"; const id=["list","leaderboard","rules"].includes(v)?v:"list";
+  document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+id));
+  document.querySelectorAll("nav a[data-v]").forEach(a=>a.classList.toggle("on",a.dataset.v===id));
+}
+$("#rows").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;sel=+b.dataset.i;renderRows();renderDetail()});
+$("#q").addEventListener("input",renderRows);
+$("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="light"?"dark":"light"});
+addEventListener("hashchange",route);
+renderRows();renderDetail();renderLB();route();
+</script>
+</body>
 </html>
