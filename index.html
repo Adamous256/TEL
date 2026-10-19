@@ -155,8 +155,9 @@ $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dat
 addEventListener("hashchange",route);
  function ytId(u) {
   if (!u) return "";
-  const m = String(u).match(/(?:youtu.be/|v=|embed/|shorts/)([\w-]{11})/);
-  return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : "");
+  const m = String(u).match(new RegExp("(?:youtu[.]be/|v=|embed/|shorts/)([A-Za-z0-9-]{11})"));
+  return m ? m[1] : (/^[A-Za-z0-9-]{11}$/.test(u) ? u : "");
+}
 }
 async function loadLevels() {
   const names = await (await fetch("data/_list.json")).json();
