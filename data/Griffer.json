@@ -7,5 +7,7 @@
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [
+        { "user": "n00by71", "link": "https://youtu.be/Q_R4ixVwKSM first victor", "hz": 120 }
+    ]
 }
