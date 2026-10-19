@@ -165,7 +165,7 @@ async function loadLevels() {
         difficulty: d.difficulty ?? "",
         creators: Array.isArray(d.creators) ? d.creators : (d.creators ? [d.creators] : []),
         verifier: d.verifier ?? "",
-        video: d.video ?? "",
+        video: ytId(d.verification || d.video),
         password: d.password ?? "",
         song: d.song ?? "",
         description: d.description ?? "",
