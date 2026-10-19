@@ -158,10 +158,25 @@ async function loadLevels() {
   return Promise.all(
     names.map(async (name, i) => {
       const res = await fetch("data/" + name + ".json");
-      return { ...(await res.json()), rank: i + 1 };
+      const d = await res.json();
+      return {
+        id: d.id ?? "",
+        name: d.name ?? name,
+        difficulty: d.difficulty ?? "",
+        creators: Array.isArray(d.creators) ? d.creators : (d.creators ? [d.creators] : []),
+        verifier: d.verifier ?? "",
+        video: d.video ?? "",
+        password: d.password ?? "",
+        song: d.song ?? "",
+        description: d.description ?? "",
+        tags: Array.isArray(d.tags) ? d.tags : [],
+        records: Array.isArray(d.records) ? d.records : [],
+        rank: i + 1
+      };
     })
   );
 }
+
 
 loadLevels().then(data => {
   LEVELS = data;          // replace the old sample array
