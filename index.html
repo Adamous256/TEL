@@ -110,7 +110,7 @@ let LEVELS = []
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const points=r=>Math.max(1,Math.round(500*Math.pow(0.96,r-1)));
-const iconTag=d=>d?`<img class="dif" src="assets/difficulties/${d.toLowerCase().replaceAll(" ","_")}.png" alt="${esc(d)}" onerror="this.remove()">`:"";
+const iconTag=d=>d?`<img class="dif" src="assets/${d.toLowerCase().replaceAll(" ","_")}.png" alt="${esc(d)}" onerror="this.remove()">`:"";
 let sel=0;
 
 function renderRows(){
