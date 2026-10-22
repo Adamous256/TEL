@@ -2,7 +2,9 @@
     "id": 129234649,
     "name": "Fantasia World",
     "author": "Kikomalakous",
-      "creators": ["Kikomalakous"],
+    "creators": [
+        "Kikomalakous"
+    ],
     "verifier": "Kikomalakous",
     "verification": "",
     "percentToQualify": 100,
@@ -38,5 +40,11 @@
             "percent": 100,
             "hz": 165
         }
-    ]
+    ],
+    "difficulty": "Hard",
+    "tags": [
+        "Fantastic",
+        "Robot"
+    ],
+    "description": "A level featuring a lot of fakes and swag routes which makes every victor decide his own path"
 }
