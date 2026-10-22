@@ -155,33 +155,39 @@ $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dat
 addEventListener("hashchange",route);
  function ytId(u) {
   if (!u) return "";
-  const m = String(u).match(new RegExp("(?:youtu[.]be/|v=|embed/|shorts/)([A-Za-z0-9-]{11})"));
-  return m ? m[1] : (/^[A-Za-z0-9-]{11}$/.test(u) ? u : "");
-}
-async function loadLevels() {
-  const names = await (await fetch("data/_list.json")).json();
-  return Promise.all(
-    names.map(async (name, i) => {
-      const res = await fetch("data/" + name + ".json");
-      const d = await res.json();
-      return {
-        id: d.id ?? "",
-        name: d.name ?? name,
-        difficulty: d.difficulty ?? "",
-        creators: Array.isArray(d.creators) ? d.creators : (d.creators ? [d.creators] : []),
-        verifier: d.verifier ?? "",
-        video: ytId(d.verification || d.video),
-        password: d.password ?? "",
-        song: d.song ?? "",
-        description: d.description ?? "",
-        tags: Array.isArray(d.tags) ? d.tags : [],
-        records: Array.isArray(d.records) ? d.records : [],
-        rank: i + 1
-      };
-    })
-  );
+  const m = String(u).match(/(?:youtu\.be\/|[?&]v=|\/(?:embed|shorts|live)\/)([\w-]{11})/);
+  return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : "");
 }
 
+async function loadLevels() {
+  const names = await (await fetch("data/_list.json")).json();
+  const levels = await Promise.all(
+    names.map(async (name, i) => {
+      try {
+        const res = await fetch("data/" + encodeURIComponent(name) + ".json");
+        if (!res.ok) return null;
+        const d = await res.json();
+        return {
+          id: d.id ?? "",
+          name: d.name ?? name,
+          difficulty: d.difficulty ?? "",
+          creators: Array.isArray(d.creators) ? d.creators : (d.creators ? [d.creators] : []),
+          verifier: d.verifier ?? "",
+          video: ytId(d.verification || d.video),
+          password: d.password ?? "",
+          song: d.song ?? "",
+          description: d.description ?? "",
+          tags: Array.isArray(d.tags) ? d.tags : [],
+          records: Array.isArray(d.records) ? d.records : [],
+          rank: i + 1
+        };
+      } catch {
+        return null;
+      }
+    })
+  );
+  return levels.filter(Boolean);
+}
 
 loadLevels().then(data => {
   LEVELS = data;          // replace the old sample array
