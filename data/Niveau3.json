@@ -16,5 +16,11 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Insane Demon",
+    "tags": [
+        "Spam",
+        "Straight Flys"
+    ],
+    "description": "This level is a nerfed version of the well-known level Superhatemeworld, featuring high cps spams, thight straight flys, wave inputs and many more !"
 }
