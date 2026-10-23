@@ -2,7 +2,9 @@
     "id": 128054805,
     "name": "Grief Ultra",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -14,5 +16,11 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Insane Demon",
+    "tags": [
+        "Wave",
+        "Tacos"
+    ],
+    "description": "A legendary remake of the most anticipated top 1, Grief. Featuring some tight wave gaps, traight flies and more. It's also the first level to ever be added and verified on the list."
 }
