@@ -1,19 +1,28 @@
-
 {
     "id": 146185962,
     "name": "Silent Clubstep Unlsh",
     "author": "LT8wrage",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "LT8wrage",
     "verification": "https://youtu.be/aPYbK4_-NW0",
     "percentToQualify": 100,
     "password": "1234",
     "records": [
-       {
+        {
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Insane Demon",
+    "tags": [
+        "Cube",
+        "Ship",
+        "Long",
+        "Learny"
+    ],
+    "description": "A nerfed version of one of the most legendary levels of the game, Silent Clubstep."
 }
