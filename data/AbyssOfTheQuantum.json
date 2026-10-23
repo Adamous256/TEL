@@ -1,12 +1,21 @@
-
 {
     "id": 143272629,
     "name": "Abyss Of The Quantum",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
     "password": "1234",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "Bad Gameplay",
+        "No Sync",
+        "Infamous",
+        "Fixed Hitboxes"
+    ],
+    "description": "A very bad level inspired from quantum abyss. With no actual good gameplay, fixed hitboxes etc"
 }
