@@ -16,5 +16,13 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "Wave",
+        "Drop",
+        "3x Speed",
+        "2.2"
+    ],
+    "description": "A nerfed version of arctic lights, an extreme demon featuring a 3x speed wave drop."
 }
