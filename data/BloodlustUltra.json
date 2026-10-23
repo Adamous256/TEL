@@ -1,12 +1,22 @@
-
 {
     "id": 145395581,
     "name": "Bloodlust Ultra",
     "author": "Adamous256",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "Adamous256",
     "verification": "",
     "percentToQualify": 100,
     "password": "1234",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "XL",
+        "Nerfed",
+        "Ship",
+        "Extention",
+        "Michi"
+    ],
+    "description": "A nerfed version of bloodlust, former top one verified by knobbelboy back in 2018"
 }
