@@ -35,5 +35,6 @@
         "Wave",
         "Sync",
         "Layout"
-    ]
+    ],
+    "description": "A nerfed version of the famous nine circles level, Defeated Circles"
 }
