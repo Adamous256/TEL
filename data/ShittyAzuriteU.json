@@ -9,5 +9,13 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Insane Demon",
+    "tags": [
+        "2.2",
+        "Fast Paced",
+        "Spider",
+        "Long",
+        "Nerve Control"
+    ]
 }
