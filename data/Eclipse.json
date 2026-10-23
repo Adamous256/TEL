@@ -9,5 +9,10 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Hard",
+    "tags": [
+        "Glitched",
+        "Mini Wave"
+    ]
 }
