@@ -64,6 +64,15 @@ th{color:var(--accent);font-weight:500;font-size:14px}
  header{grid-template-columns:1fr auto;height:auto;padding:10px 12px;gap:8px}nav{grid-column:1/-1;order:3;justify-content:center}
  #v-list.on{grid-template-columns:1fr;grid-template-rows:40vh auto}.stats div{font-size:20px}h1{font-size:26px}
 }
+ .r-controls{display:flex;gap:14px;flex-wrap:wrap;align-items:end;margin-bottom:16px}
+.r-controls label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--dim);font-weight:500}
+.r-controls input[type=number],.r-controls select{padding:10px 12px;border-radius:10px;border:0;background:var(--row);color:var(--text);font:inherit;width:130px}
+.r-controls .r-check{flex-direction:row;align-items:center;color:var(--text);padding-bottom:10px}
+#r-out{margin:18px 0 8px;min-height:90px}
+.r-card{display:flex;align-items:center;gap:16px;background:var(--row);border-radius:14px;padding:20px;font-size:28px}
+.r-card .dif{height:44px}.r-card .rank{width:auto;color:var(--gold)}
+.r-actions{margin-top:12px}
+#r-hist .rec{cursor:default}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </style>
 </head>
@@ -73,6 +82,7 @@ th{color:var(--accent);font-weight:500;font-size:14px}
   <nav>
     <a href="#list" data-v="list">Demon list</a>
     <a href="#leaderboard" data-v="leaderboard">Leaderboard</a>
+    <a href="#roulette" data-v="roulette">Roulette</a>
     <a href="#rules" data-v="rules">Rules</a>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLScPp6rMxPlLm3uTx0dNmcqfecFL34YupZEXIr5eUyl0xDLtRA/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit a record</a>
   </nav>
@@ -92,6 +102,20 @@ th{color:var(--accent);font-weight:500;font-size:14px}
     <div class="card" id="recs"></div>
   </section>
   <section class="view" id="v-leaderboard"><div class="page card" id="lb"></div></section>
+  <section class="view" id="v-roulette"><div class="page card">
+    <h1>Roulette</h1>
+    <p class="desc">Pick a random level to play. Set the range of ranks and the difficulty, then spin.</p>
+    <div class="r-controls">
+      <label>From rank<input type="number" id="r-from" min="1" value="1"></label>
+      <label>To rank<input type="number" id="r-to" min="1" value="1"></label>
+      <label>Difficulty<select id="r-dif"><option value="">All</option></select></label>
+      <label class="r-check"><input type="checkbox" id="r-norep" checked> No repeats</label>
+    </div>
+    <button class="btn" id="r-spin">Spin</button>
+    <div id="r-out" aria-live="polite"></div>
+    <h2>History</h2>
+    <div id="r-hist"><p class="empty">No spins yet.</p></div>
+  </div></section>
   <section class="view" id="v-rules"><div class="page card">
     <h1>Rules</h1>
     <ul>
@@ -103,10 +127,22 @@ th{color:var(--accent);font-weight:500;font-size:14px}
   </div></section>
 </main>
 <script>
-/* ===== EDIT THIS DATA ===== */
-const MAIN_SIZE = 75; // ranks after this appear under "Extended list"
-let LEVELS = []
-/* ========================== */
+/* ===== SETTINGS ===== */
+const MAIN_SIZE = 75;            // ranks after this appear under "Extended list"
+const DATA_PATH = "data";        // folder with _list.json and one .json per level
+/* ===================== */
+const SAMPLE=[{id:100000001,name:"Sample Level",difficulty:"Medium Demon",creators:["Creator"],verifier:"Player",video:"dQw4w9WgXcQ",password:"",song:"",description:"Shown only when data/ cannot be loaded (for example when the file is opened without a web server).",tags:[],records:[]}];
+let LEVELS=[];
+const ytId=u=>{u=String(u||"").trim();if(/^[\w-]{11}$/.test(u))return u;const m=u.match(/(?:[?&]v=|youtu\.be\/|\/(?:embed|shorts|live|v)\/)([\w-]{11})/);return m?m[1]:""};
+const norm=d=>({id:d.id??"",name:d.name||"Unnamed",difficulty:d.difficulty||"",creators:d.creators?.length?d.creators:(d.author?[d.author]:[]),verifier:d.verifier||"",video:ytId(d.video)||ytId(d.verification),vurl:d.verification||"",password:d.password||"",song:d.song||"",description:d.description||"",tags:d.tags||[],records:d.records||[]});
+async function loadData(){
+  try{
+    const list=await (await fetch(`${DATA_PATH}/_list.json`,{cache:"no-cache"})).json();
+    const all=await Promise.all(list.map(async n=>{try{const r=await fetch(`${DATA_PATH}/${encodeURIComponent(n)}.json`,{cache:"no-cache"});return r.ok?norm(await r.json()):null}catch{return null}}));
+    LEVELS=all.filter(Boolean);
+    if(!LEVELS.length)throw new Error("empty");
+  }catch(e){LEVELS=SAMPLE}
+}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const points=r=>Math.max(1,Math.round(500*Math.pow(0.96,r-1)));
@@ -127,72 +163,63 @@ function renderDetail(){
   if(!l){$("#detail").innerHTML=`<p class="empty">Add levels to LEVELS in index.html.</p>`;$("#recs").innerHTML="";return}
   $("#detail").innerHTML=`<h1>${iconTag(l.difficulty)}${esc(l.name)}</h1>
   ${l.description?`<p class="desc">${esc(l.description)}</p>`:""}
-  <div class="video"><iframe src="https://www.youtube.com/embed/${esc(l.video)}" title="${esc(l.name)} verification" allowfullscreen loading="lazy"></iframe></div>
+  ${l.video?`<div class="video"><iframe src="https://www.youtube.com/embed/${esc(l.video)}" title="${esc(l.name)} verification" allowfullscreen loading="lazy"></iframe></div>`:(l.vurl?`<p class="empty"><a href="${esc(l.vurl)}" target="_blank" rel="noopener">Watch the verification</a></p>`:`<p class="empty">No verification video yet.</p>`)}
   ${l.tags.length?`<div class="tags">${l.tags.map(t=>`<span>${esc(t)}</span>`).join("")}</div>`:`<div class="tags"></div>`}
   <div class="stats">
     <div><span>Level ID</span>${esc(l.id)}</div><div><span>List points</span>${points(sel+1)}</div><div><span>Password</span>${esc(l.password||"None")}</div>
     <div><span>Verifier</span>${esc(l.verifier)}</div><div><span>Creators</span>${l.creators.map(esc).join(", ")}</div><div><span>Song</span>${esc(l.song||"—")}</div>
   </div>`;
   $("#recs").innerHTML=l.records.length
-    ?`<h2>Records</h2>`+l.records.map(r=>`<div class="rec"><a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.user)}</a><small>${esc(r.hz)} Hz</small></div>`).join("")
+    ?`<h2>Records</h2>`+l.records.map(r=>`<div class="rec"><a href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.user)}</a><small>${r.percent&&r.percent<100?esc(r.percent)+"% · ":""}${esc(r.hz||"?")} Hz</small></div>`).join("")
     :`<h2>No records</h2><p class="empty">Be the first to submit one.</p>`;
 }
 function renderLB(){
   const t={};
   LEVELS.forEach((l,i)=>{const p=points(i+1);
-    [l.verifier,...l.records.map(r=>r.user)].forEach(u=>{(t[u]??={pts:0,n:0});t[u].pts+=p;t[u].n++});});
+    [l.verifier,...l.records.filter(r=>(r.percent??100)>=100).map(r=>r.user)].filter(Boolean).forEach(u=>{(t[u]??={pts:0,n:0});t[u].pts+=p;t[u].n++});});
   const rows=Object.entries(t).sort((a,b)=>b[1].pts-a[1].pts);
   $("#lb").innerHTML=`<h1>Leaderboard</h1><table><tr><th>#</th><th>Player</th><th>Completions</th><th>Points</th></tr>${rows.map(([u,v],i)=>`<tr><td>${i+1}</td><td>${esc(u)}</td><td>${v.n}</td><td>${v.pts}</td></tr>`).join("")}</table>`;
 }
 function route(){
-  const v=location.hash.slice(1)||"list"; const id=["list","leaderboard","rules"].includes(v)?v:"list";
+  const v=location.hash.slice(1)||"list"; const id=["list","leaderboard","roulette","rules"].includes(v)?v:"list";
   document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+id));
   document.querySelectorAll("nav a[data-v]").forEach(a=>a.classList.toggle("on",a.dataset.v===id));
 }
+const R={timer:null,seen:new Set(),hist:[]};
+function initRoulette(){
+  $("#r-from").value=1;$("#r-to").value=LEVELS.length||1;$("#r-to").max=LEVELS.length||1;
+  const ds=[...new Set(LEVELS.map(l=>l.difficulty).filter(Boolean))];
+  $("#r-dif").innerHTML=`<option value="">All</option>`+ds.map(d=>`<option>${esc(d)}</option>`).join("");
+}
+function rPool(){
+  const from=Math.max(1,+$("#r-from").value||1),to=Math.min(LEVELS.length,+$("#r-to").value||LEVELS.length);
+  const dif=$("#r-dif").value;
+  let pool=LEVELS.map((l,i)=>({l,i})).filter(x=>x.i+1>=from&&x.i+1<=to&&(!dif||x.l.difficulty===dif));
+  if($("#r-norep").checked){const fresh=pool.filter(x=>!R.seen.has(x.i));if(fresh.length)pool=fresh;else R.seen.clear()}
+  return pool;
+}
+function rSpin(){
+  const pool=rPool(),out=$("#r-out");
+  clearTimeout(R.timer);
+  if(!pool.length){out.innerHTML=`<p class="empty">No level matches these settings.</p>`;return}
+  const pick=pool[Math.floor(Math.random()*pool.length)];
+  const show=x=>{out.innerHTML=`<div class="r-card"><span class="rank">#${x.i+1}</span>${iconTag(x.l.difficulty)}<strong>${esc(x.l.name)}</strong></div>`};
+  const done=()=>{
+    show(pick);R.seen.add(pick.i);R.hist.unshift(pick);R.hist=R.hist.slice(0,10);
+    out.insertAdjacentHTML("beforeend",`<div class="r-actions"><button class="btn" data-open="${pick.i}">Open in list</button></div>`);
+    $("#r-hist").innerHTML=R.hist.map(x=>`<div class="rec"><span>#${x.i+1} ${esc(x.l.name)}</span><small>${esc(x.l.difficulty||"")}</small></div>`).join("");
+  };
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
+  let step=0;
+  (function tick(){if(step++>=20){done();return}show(pool[Math.floor(Math.random()*pool.length)]);R.timer=setTimeout(tick,60+step*12)})();
+}
+$("#r-spin").addEventListener("click",rSpin);
+$("#r-out").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(!b)return;sel=+b.dataset.open;location.hash="#list";renderRows();renderDetail()});
 $("#rows").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;sel=+b.dataset.i;renderRows();renderDetail()});
 $("#q").addEventListener("input",renderRows);
 $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="light"?"dark":"light"});
 addEventListener("hashchange",route);
- function ytId(u) {
-  if (!u) return "";
-  const m = String(u).match(/(?:youtu\.be\/|[?&]v=|\/(?:embed|shorts|live)\/)([\w-]{11})/);
-  return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : "");
-}
-
-async function loadLevels() {
-  const names = await (await fetch("data/_list.json")).json();
-  const levels = await Promise.all(
-    names.map(async (name, i) => {
-      try {
-        const res = await fetch("data/" + encodeURIComponent(name) + ".json");
-        if (!res.ok) return null;
-        const d = await res.json();
-        return {
-          id: d.id ?? "",
-          name: d.name ?? name,
-          difficulty: d.difficulty ?? "",
-          creators: Array.isArray(d.creators) ? d.creators : (d.creators ? [d.creators] : []),
-          verifier: d.verifier ?? "",
-          video: ytId(d.verification || d.video),
-          password: d.password ?? "",
-          song: d.song ?? "",
-          description: d.description ?? "",
-          tags: Array.isArray(d.tags) ? d.tags : [],
-          records: Array.isArray(d.records) ? d.records : [],
-          rank: i + 1
-        };
-      } catch {
-        return null;
-      }
-    })
-  );
-  return levels.filter(Boolean);
-}
-
-loadLevels().then(data => {
-  LEVELS = data;          // replace the old sample array
-  renderRows(); renderDetail(); renderLB(); route();
-});
+route();loadData().then(()=>{renderRows();renderDetail();renderLB();initRoulette()});
 </script>
 </body>
 </html>
