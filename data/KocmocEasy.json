@@ -2,7 +2,9 @@
     "id": 141017195,
     "name": "Kocmoc Easy",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -14,5 +16,15 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "3x Speed",
+        "Kocmoc",
+        "Cherry team",
+        "Nerve Control",
+        "2.2",
+        "Wave"
+    ],
+    "description": "A nerfed version of kocmoc, a really well decorated level made by cherry team"
 }
