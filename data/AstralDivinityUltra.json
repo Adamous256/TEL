@@ -2,7 +2,9 @@
     "id": 146476519,
     "name": "Astral Divinity Ultra",
     "author": "Adamous256",
-    "creators": ["Adamous256"],
+    "creators": [
+        "Adamous256"
+    ],
     "verifier": "PristineFly",
     "verification": "",
     "percentToQualify": 100,
@@ -19,6 +21,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "n00by71",
+            "link": "-",
+            "percent": 100,
+            "hz": 120
         }
     ]
 }
