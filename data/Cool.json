@@ -2,10 +2,16 @@
     "id": 129196522,
     "name": "Cool",
     "author": "Adamous256",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "Adamous256",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [],
+    "difficulty": "Harder",
+    "tags": [
+        "Dual"
+    ]
 }
