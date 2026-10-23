@@ -28,5 +28,12 @@
             "percent": 100,
             "hz": 120
         }
+    ],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "2.2",
+        "Wave",
+        "Sync",
+        "Layout"
     ]
 }
