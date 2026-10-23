@@ -40,5 +40,10 @@
             "percent": 100,
             "hz": 60
         }
+    ],
+    "difficulty": "Easy",
+    "tags": [
+        "Spider",
+        "Boss fight"
     ]
 }
