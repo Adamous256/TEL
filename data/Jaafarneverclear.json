@@ -28,5 +28,10 @@
             "percent": 100,
             "hz": 60
         }
+    ],
+    "difficulty": "Hard",
+    "tags": [
+        "x3 Speed",
+        "Wave"
     ]
 }
