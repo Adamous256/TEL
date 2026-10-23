@@ -71,7 +71,8 @@ th{color:var(--accent);font-weight:500;font-size:14px}
 #r-out{margin:18px 0 8px;min-height:90px}
 .r-card{display:flex;align-items:center;gap:16px;background:var(--row);border-radius:14px;padding:20px;font-size:28px}
 .r-card .dif{height:44px}.r-card .rank{width:auto;color:var(--gold)}
-.r-actions{margin-top:12px}
+.r-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
+.btn.alt{background:var(--row);color:var(--text)}
 #r-hist .rec{cursor:default}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </style>
@@ -199,22 +200,23 @@ function rPool(){
   return pool;
 }
 function rSpin(){
+  if(R.finish){R.finish();return}
   const pool=rPool(),out=$("#r-out");
-  clearTimeout(R.timer);
   if(!pool.length){out.innerHTML=`<p class="empty">No level matches these settings.</p>`;return}
   const pick=pool[Math.floor(Math.random()*pool.length)];
   const show=x=>{out.innerHTML=`<div class="r-card"><span class="rank">#${x.i+1}</span>${iconTag(x.l.difficulty)}<strong>${esc(x.l.name)}</strong></div>`};
   const done=()=>{
+    clearTimeout(R.timer);R.finish=null;
     show(pick);R.seen.add(pick.i);R.hist.unshift(pick);R.hist=R.hist.slice(0,10);
-    out.insertAdjacentHTML("beforeend",`<div class="r-actions"><button class="btn" data-open="${pick.i}">Open in list</button></div>`);
+    out.insertAdjacentHTML("beforeend",`<div class="r-actions"><button class="btn" data-next>Next level</button><button class="btn alt" data-open="${pick.i}">Open in list</button></div>`);
     $("#r-hist").innerHTML=R.hist.map(x=>`<div class="rec"><span>#${x.i+1} ${esc(x.l.name)}</span><small>${esc(x.l.difficulty||"")}</small></div>`).join("");
   };
   if(matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
-  let step=0;
-  (function tick(){if(step++>=20){done();return}show(pool[Math.floor(Math.random()*pool.length)]);R.timer=setTimeout(tick,60+step*12)})();
+  let step=0;R.finish=done;
+  (function tick(){if(step++>=7){done();return}show(pool[Math.floor(Math.random()*pool.length)]);R.timer=setTimeout(tick,40+step*10)})();
 }
 $("#r-spin").addEventListener("click",rSpin);
-$("#r-out").addEventListener("click",e=>{const b=e.target.closest("[data-open]");if(!b)return;sel=+b.dataset.open;location.hash="#list";renderRows();renderDetail()});
+$("#r-out").addEventListener("click",e=>{if(e.target.closest("[data-next]")){rSpin();return}const b=e.target.closest("[data-open]");if(!b)return;sel=+b.dataset.open;location.hash="#list";renderRows();renderDetail()});
 $("#rows").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;sel=+b.dataset.i;renderRows();renderDetail()});
 $("#q").addEventListener("input",renderRows);
 $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="light"?"dark":"light"});
