@@ -9,7 +9,14 @@
     "verification": "https://youtu.be/0T-ncZ7624E?si=GumGf3PG7QtkbXYu",
     "percentToQualify": 100,
     "password": "-",
-    "records": [],
+    "records": [
+        {
+            "user": "n00by71",
+            "link": "-",
+            "percent": 100,
+            "hz": 120
+        }
+    ],
     "difficulty": "Harder",
     "tags": [
         "Wave",
