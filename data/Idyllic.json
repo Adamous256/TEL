@@ -2,7 +2,9 @@
     "id": 128699827,
     "name": "Idyllic",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -13,6 +15,12 @@
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
             "hz": 240
+        },
+        {
+            "user": "n00by71",
+            "link": "-",
+            "percent": 100,
+            "hz": 120
         }
     ]
 }
