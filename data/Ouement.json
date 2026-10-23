@@ -70,5 +70,10 @@
             "percent": 100,
             "hz": 60
         }
+    ],
+    "difficulty": "Hard",
+    "tags": [
+        "Wave",
+        "1x Speed"
     ]
 }
