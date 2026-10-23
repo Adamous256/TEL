@@ -2,7 +2,9 @@
     "id": 147195794,
     "name": "Five Nights",
     "author": "LT8wrage",
-    "creators": ["Warman210"],
+    "creators": [
+        "Warman210"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -14,5 +16,16 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Insane Demon",
+    "tags": [
+        "2.2",
+        "Wave",
+        "Long",
+        "Effects",
+        "Learny",
+        "x3 Speed",
+        "Fun"
+    ],
+    "description": "Inspired from the legendary game Five Nights At Freddy's, this level features multiple cool features and an overall fun gameplay which makes it one of the most loved levels on this list."
 }
