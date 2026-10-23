@@ -9,5 +9,11 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "2x Speed",
+        "Wave"
+    ],
+    "description": "A nerfed version of one of the most hated levels of all time, sanguine. due to its ridiculous timings, tight wave gaps, straight flies and many more"
 }
