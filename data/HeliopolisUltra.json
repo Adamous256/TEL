@@ -9,5 +9,14 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "Timings",
+        "Learny",
+        "2.2",
+        "Cube",
+        "Robot"
+    ],
+    "description": "A nerfed version of what could be one of the most infamous top 1s in geometry dash's history, Heliopolis"
 }
