@@ -68,12 +68,24 @@ th{color:var(--accent);font-weight:500;font-size:14px}
 .r-controls label{display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--dim);font-weight:500}
 .r-controls input[type=number],.r-controls select{padding:10px 12px;border-radius:10px;border:0;background:var(--row);color:var(--text);font:inherit;width:130px}
 .r-controls .r-check{flex-direction:row;align-items:center;color:var(--text);padding-bottom:10px}
-#r-out{margin:18px 0 8px;min-height:90px}
 .r-card{display:flex;align-items:center;gap:16px;background:var(--row);border-radius:14px;padding:20px;font-size:28px}
 .r-card .dif{height:44px}.r-card .rank{width:auto;color:var(--gold)}
 .r-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap}
 .btn.alt{background:var(--row);color:var(--text)}
 #r-hist .rec{cursor:default}
+[hidden]{display:none!important}
+#v-roulette .page{max-width:1040px}
+.r-title{text-align:center;border:0}
+.r-level{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:28px;align-items:center;margin:18px 0}
+.r-rank{font-size:40px;font-weight:700}
+.r-name{font-size:30px;font-weight:600;line-height:1.15;display:flex;gap:10px;align-items:center}
+.r-name .dif{height:34px}
+.r-id,.r-by{color:var(--dim);margin-top:8px}
+.r-side{display:flex;flex-direction:column;gap:12px;text-align:center}
+.r-need{background:var(--row);border-radius:10px;padding:14px 20px;color:var(--dim);font-weight:600}
+.r-tools{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px 0 8px}
+.btn.ok{background:#1d3a22;color:#d8f5de}.btn.bad{background:#3a1d1d;color:#f5d8d8}
+@media(max-width:760px){.r-level{grid-template-columns:1fr}}
 :focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </style>
 </head>
@@ -104,18 +116,49 @@ th{color:var(--accent);font-weight:500;font-size:14px}
   </section>
   <section class="view" id="v-leaderboard"><div class="page card" id="lb"></div></section>
   <section class="view" id="v-roulette"><div class="page card">
-    <h1>Roulette</h1>
-    <p class="desc">Pick a random level to play. Set the range of ranks and the difficulty, then spin.</p>
-    <div class="r-controls">
-      <label>From rank<input type="number" id="r-from" min="1" value="1"></label>
-      <label>To rank<input type="number" id="r-to" min="1" value="1"></label>
-      <label>Difficulty<select id="r-dif"><option value="">All</option></select></label>
-      <label class="r-check"><input type="checkbox" id="r-norep" checked> No repeats</label>
+    <div id="r-menu">
+      <h1>Roulette</h1>
+      <p class="desc">Beat random levels one after another. The first level needs 5%, then 10%, 15% and so on: every new level needs 5% more than the last one. Press Done when you reach the required percentage, or give up to end the run.</p>
+      <div class="r-controls">
+        <label>From rank<input type="number" id="r-from" min="1" value="1"></label>
+        <label>To rank<input type="number" id="r-to" min="1" value="1"></label>
+        <label>Difficulty<select id="r-dif"><option value="">All</option></select></label>
+      </div>
+      <div class="r-actions"><button class="btn" id="r-start">Start</button><button class="btn alt" id="r-continue" hidden>Continue run</button></div>
     </div>
-    <button class="btn" id="r-spin">Spin</button>
-    <div id="r-out" aria-live="polite"></div>
-    <h2>History</h2>
-    <div id="r-hist"><p class="empty">No spins yet.</p></div>
+    <div id="r-run" hidden>
+      <div id="r-live">
+        <h1 class="r-title">Current Level</h1>
+        <div class="r-level">
+          <div class="video" id="r-video"></div>
+          <div class="r-info">
+            <div class="r-rank" id="r-rank"></div>
+            <div class="r-name" id="r-name"></div>
+            <div class="r-id" id="r-id"></div>
+            <div class="r-by" id="r-by"></div>
+          </div>
+          <div class="r-side">
+            <div class="r-need" id="r-need"></div>
+            <button class="btn" id="r-done">Done</button>
+            <button class="btn bad" id="r-giveup">Give up</button>
+          </div>
+        </div>
+      </div>
+      <div id="r-over" hidden>
+        <h1 class="r-title">Run over</h1>
+        <p class="desc" id="r-summary"></p>
+      </div>
+      <h2>Completed</h2>
+      <div id="r-hist"></div>
+    </div>
+    <div class="r-tools">
+      <button class="btn alt" id="r-import">Import</button>
+      <button class="btn ok" id="r-export">Export</button>
+      <button class="btn bad" id="r-reset">Reset</button>
+      <button class="btn alt" id="r-back" hidden>Return to Menu</button>
+    </div>
+    <p class="empty" id="r-msg" aria-live="polite"></p>
+    <input type="file" id="r-file" accept="application/json,.json" hidden>
   </div></section>
   <section class="view" id="v-rules"><div class="page card">
     <h1>Rules</h1>
@@ -186,37 +229,90 @@ function route(){
   document.querySelectorAll(".view").forEach(e=>e.classList.toggle("on",e.id==="v-"+id));
   document.querySelectorAll("nav a[data-v]").forEach(a=>a.classList.toggle("on",a.dataset.v===id));
 }
-const R={timer:null,seen:new Set(),hist:[]};
+const RKEY="tel-roulette";
+let RS=null,rView="menu";
+const rSave=()=>{try{RS?localStorage.setItem(RKEY,JSON.stringify(RS)):localStorage.removeItem(RKEY)}catch{}};
+const rLoad=()=>{try{const v=JSON.parse(localStorage.getItem(RKEY)||"null");return v&&Array.isArray(v.done)&&v.cfg?v:null}catch{return null}};
+const rNeed=()=>Math.min(100,5*(RS.done.length+1));
+const rFind=n=>{const i=LEVELS.findIndex(l=>l.name===n);return i<0?null:{i,l:LEVELS[i]}};
+function rPick(){
+  const used=new Set(RS.done.map(d=>d.name));const {from,to,dif}=RS.cfg;
+  const pool=LEVELS.map((l,i)=>({l,i})).filter(x=>x.i+1>=from&&x.i+1<=to&&(!dif||x.l.difficulty===dif)&&!used.has(x.l.name));
+  if(!pool.length){RS.over="empty";RS.current=null;return}
+  RS.current=pool[Math.floor(Math.random()*pool.length)].l.name;
+}
 function initRoulette(){
   $("#r-from").value=1;$("#r-to").value=LEVELS.length||1;$("#r-to").max=LEVELS.length||1;
   const ds=[...new Set(LEVELS.map(l=>l.difficulty).filter(Boolean))];
   $("#r-dif").innerHTML=`<option value="">All</option>`+ds.map(d=>`<option>${esc(d)}</option>`).join("");
+  RS=rLoad();rView="menu";rRender();
 }
-function rPool(){
+function rRender(){
+  const run=rView==="run"&&RS;
+  $("#r-menu").hidden=!!run;$("#r-run").hidden=!run;
+  $("#r-continue").hidden=!RS;$("#r-export").hidden=!RS;$("#r-reset").hidden=!RS;$("#r-back").hidden=!run;
+  if(!run)return;
+  if(!RS.over&&!rFind(RS.current)){rPick();rSave()}
+  const cur=RS.over&&!RS.current?null:rFind(RS.current);
+  $("#r-live").hidden=!!RS.over;$("#r-over").hidden=!RS.over;
+  if(!RS.over&&cur){
+    const {i,l}=cur;
+    $("#r-video").innerHTML=l.video?`<iframe src="https://www.youtube.com/embed/${esc(l.video)}" title="${esc(l.name)} verification" allowfullscreen loading="lazy"></iframe>`:`<p class="empty" style="padding:16px">No verification video.</p>`;
+    $("#r-rank").textContent="#"+(i+1);
+    $("#r-name").innerHTML=iconTag(l.difficulty)+`<span>${esc(l.name)}</span>`;
+    $("#r-id").textContent=l.id?`(${l.id})`:"";
+    $("#r-by").innerHTML="Published by:<br>"+(l.creators.map(esc).join(", ")||"—");
+    $("#r-need").textContent=`AT LEAST ${rNeed()}%`;
+  }
+  if(RS.over){
+    const n=RS.done.length,plural=n===1?"":"s";
+    let m=RS.over==="won"?`You reached 100%. Run complete with ${n} level${plural}.`
+      :RS.over==="empty"?`No levels are left in this range. You completed ${n} level${plural}.`
+      :`You completed ${n} level${plural}.`;
+    const q=RS.over==="quit"?rFind(RS.current):null;
+    if(q)m+=` You gave up on #${q.i+1} ${q.l.name}, which needed ${rNeed()}%.`;
+    $("#r-summary").textContent=m;
+  }
+  $("#r-hist").innerHTML=RS.done.length?RS.done.map((d,k)=>`<div class="rec"><span>${k+1}. #${d.rank} ${esc(d.name)}</span><small>${d.pct}%</small></div>`).join(""):`<p class="empty">No level completed yet.</p>`;
+}
+$("#r-start").addEventListener("click",()=>{
+  if(RS&&!RS.over&&!confirm("Start a new run? The current one will be lost."))return;
   const from=Math.max(1,+$("#r-from").value||1),to=Math.min(LEVELS.length,+$("#r-to").value||LEVELS.length);
-  const dif=$("#r-dif").value;
-  let pool=LEVELS.map((l,i)=>({l,i})).filter(x=>x.i+1>=from&&x.i+1<=to&&(!dif||x.l.difficulty===dif));
-  if($("#r-norep").checked){const fresh=pool.filter(x=>!R.seen.has(x.i));if(fresh.length)pool=fresh;else R.seen.clear()}
-  return pool;
-}
-function rSpin(){
-  if(R.finish){R.finish();return}
-  const pool=rPool(),out=$("#r-out");
-  if(!pool.length){out.innerHTML=`<p class="empty">No level matches these settings.</p>`;return}
-  const pick=pool[Math.floor(Math.random()*pool.length)];
-  const show=x=>{out.innerHTML=`<div class="r-card"><span class="rank">#${x.i+1}</span>${iconTag(x.l.difficulty)}<strong>${esc(x.l.name)}</strong></div>`};
-  const done=()=>{
-    clearTimeout(R.timer);R.finish=null;
-    show(pick);R.seen.add(pick.i);R.hist.unshift(pick);R.hist=R.hist.slice(0,10);
-    out.insertAdjacentHTML("beforeend",`<div class="r-actions"><button class="btn" data-next>Next level</button><button class="btn alt" data-open="${pick.i}">Open in list</button></div>`);
-    $("#r-hist").innerHTML=R.hist.map(x=>`<div class="rec"><span>#${x.i+1} ${esc(x.l.name)}</span><small>${esc(x.l.difficulty||"")}</small></div>`).join("");
-  };
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches){done();return}
-  let step=0;R.finish=done;
-  (function tick(){if(step++>=7){done();return}show(pool[Math.floor(Math.random()*pool.length)]);R.timer=setTimeout(tick,40+step*10)})();
-}
-$("#r-spin").addEventListener("click",rSpin);
-$("#r-out").addEventListener("click",e=>{if(e.target.closest("[data-next]")){rSpin();return}const b=e.target.closest("[data-open]");if(!b)return;sel=+b.dataset.open;location.hash="#list";renderRows();renderDetail()});
+  RS={cfg:{from,to,dif:$("#r-dif").value},done:[],current:null,over:null};
+  rPick();rSave();rView="run";$("#r-msg").textContent="";rRender();
+});
+$("#r-continue").addEventListener("click",()=>{rView="run";rRender()});
+$("#r-back").addEventListener("click",()=>{rView="menu";rRender()});
+$("#r-done").addEventListener("click",()=>{
+  if(!RS||RS.over)return;
+  const c=rFind(RS.current),need=rNeed();
+  RS.done.push({name:RS.current,rank:c?c.i+1:0,pct:need});
+  if(need>=100){RS.over="won";RS.current=null}else rPick();
+  rSave();rRender();
+});
+$("#r-giveup").addEventListener("click",()=>{
+  if(!RS||RS.over||!confirm("Give up and end this run?"))return;
+  RS.over="quit";rSave();rRender();
+});
+$("#r-reset").addEventListener("click",()=>{
+  if(!RS||!confirm("Reset the roulette? The current run will be deleted."))return;
+  RS=null;rView="menu";rSave();$("#r-msg").textContent="";rRender();
+});
+$("#r-export").addEventListener("click",()=>{
+  if(!RS)return;
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(RS,null,2)],{type:"application/json"}));
+  a.download="easy-list-roulette.json";a.click();URL.revokeObjectURL(a.href);
+});
+$("#r-import").addEventListener("click",()=>$("#r-file").click());
+$("#r-file").addEventListener("change",async e=>{
+  const f=e.target.files[0];e.target.value="";if(!f)return;
+  try{
+    const v=JSON.parse(await f.text());
+    if(!v||!Array.isArray(v.done)||!v.cfg)throw new Error("bad");
+    RS=v;rView="run";rSave();$("#r-msg").textContent="Run imported.";rRender();
+  }catch{$("#r-msg").textContent="That file is not a valid roulette run."}
+});
 $("#rows").addEventListener("click",e=>{const b=e.target.closest(".row");if(!b)return;sel=+b.dataset.i;renderRows();renderDetail()});
 $("#q").addEventListener("input",renderRows);
 $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="light"?"dark":"light"});
