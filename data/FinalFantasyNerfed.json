@@ -9,5 +9,11 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "Cube",
+        "Timings"
+    ],
+    "description": "A nerfed version of the legendary level final fantasy. featuring the eight jumps of hell from silent clubstep"
 }
