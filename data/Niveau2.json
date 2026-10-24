@@ -6,7 +6,7 @@
         "LT8wrage"
     ],
     "verifier": "LT8wrage",
-    "verification": "",
+    "verification": "https://youtu.be/5qtLbuC7bbw",
     "percentToQualify": 100,
     "password": "",
     "records": [
@@ -17,5 +17,15 @@
             "hz": 240
         }
     ],
-    "difficulty": "Extreme Demon"
+    "difficulty": "Extreme Demon",
+    "tags": [
+        "High CPS Spam",
+        "2.2",
+        "Fixed Hitboxes",
+        "Nerve Control",
+        "Long",
+        "Ship",
+        "Unbalanced"
+    ],
+    "description": "A nerfed version of the former top 1, Acheron."
 }
