@@ -10,5 +10,15 @@
     "verification": "https://youtu.be/3qDSuEYqYMY",
     "percentToQualify": 100,
     "password": "1234",
-    "records": []
+    "records": [],
+    "tags": [
+        "Wave",
+        "2.2",
+        "Fixed Hitboxes",
+        "Nerve Control",
+        "High CPS",
+        "Extreme",
+        "Mental"
+    ],
+    "description": "A nerfed version of the former top 1, Thinking Space II"
 }
