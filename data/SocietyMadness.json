@@ -16,5 +16,17 @@
             "percent": 100,
             "hz": 60
         }
-    ]
+    ],
+    "difficulty": "Medium Demon",
+    "tags": [
+        "4x Speed",
+        "Mini Wave",
+        "Wave",
+        "Ship",
+        "Society",
+        "High CPS",
+        "Nerve Control",
+        "Learny"
+    ],
+    "description": "This level is an original mix of stereo madness and society, featuring a high speed wave drop and lots of cool effects."
 }
