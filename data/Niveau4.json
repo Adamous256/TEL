@@ -6,7 +6,7 @@
         "AzzerxGD"
     ],
     "verifier": "Adamous256",
-    "verification": "",
+    "verification": "https://youtu.be/2C20rzqNSqE",
     "percentToQualify": 100,
     "password": "1234",
     "records": [
@@ -19,8 +19,13 @@
     ],
     "difficulty": "Insane Demon",
     "tags": [
-        "Wave",
-        "3x Speed"
+        "Nerfed",
+        "Fixed Hitboxes",
+        "2.2",
+        "Fast Pace",
+        "Timings",
+        "Learny",
+        "Unbalanced"
     ],
     "description": "A nerfed Version of the legendary former top 1 Tidal Wave"
 }
