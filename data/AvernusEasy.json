@@ -15,6 +15,12 @@
             "link": "-",
             "percent": 100,
             "hz": 120
+        },
+        {
+            "user": "Fliyo",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
         }
     ],
     "difficulty": "Harder",
