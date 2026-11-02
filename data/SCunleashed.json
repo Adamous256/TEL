@@ -21,6 +21,12 @@
             "link": "-",
             "percent": 100,
             "hz": 144
+        },
+        {
+            "user": "WokkeyGMD",
+            "link": "https://youtu.be/Lkd7-fs_aEE?si=Mjr1y85mKySOi8VU",
+            "percent": 100,
+            "hz": 60
         }
     ]
 }
