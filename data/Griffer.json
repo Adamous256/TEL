@@ -2,12 +2,26 @@
     "id": 147572233,
     "name": "Griffer",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
     "records": [
-        { "user": "n00by71", "link": "https://youtu.be/Q_R4ixVwKSM first victor", "hz": 120 }
-    ]
+        {
+            "user": "n00by71",
+            "link": "https://youtu.be/Q_R4ixVwKSM first victor",
+            "hz": 120
+        }
+    ],
+    "difficulty": "Medium Demon",
+    "tags": [
+        "Grief",
+        "Short",
+        "Wave",
+        "3x Speed"
+    ],
+    "description": "A short level inspired by the best part on grief, Griefer"
 }
