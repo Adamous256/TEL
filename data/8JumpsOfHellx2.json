@@ -16,5 +16,10 @@
             "percent": 100,
             "hz": 120
         }
-    ]
+    ],
+    "difficulty": "Medium Demon",
+    "tags": [
+        "Cube"
+    ],
+    "description": "The name says it all."
 }
