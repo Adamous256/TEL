@@ -1,9 +1,10 @@
-
 {
     "id": 143540572,
     "name": "Acheron Ultra Legacy",
     "author": "Adamous256",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "Adamous256",
     "verification": "",
     "percentToQualify": 100,
@@ -15,5 +16,14 @@
             "percent": 100,
             "hz": 144
         }
-    ]
+    ],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "2.2",
+        "Timings",
+        "Ship",
+        "Wave",
+        "Nerve Control"
+    ],
+    "description": "A nerfed version of Acheron, one of the most legendary top 1s in the game made by Riot"
 }
