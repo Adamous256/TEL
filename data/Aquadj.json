@@ -22,5 +22,14 @@
             "percent": 100,
             "hz": 60
         }
-    ]
+    ],
+    "difficulty": "Harder",
+    "tags": [
+        "Deco",
+        "Cube",
+        "Robot",
+        "2.2",
+        "Timings"
+    ],
+    "description": "A well designed short lenght level"
 }
