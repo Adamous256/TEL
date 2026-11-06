@@ -16,5 +16,10 @@
             "percent": 100,
             "hz": 120
         }
+    ],
+    "difficulty": "Insane",
+    "tags": [
+        "Wave",
+        "Nine circles"
     ]
 }
