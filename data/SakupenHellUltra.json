@@ -9,5 +9,6 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [],
+    "difficulty": "Medium Demon"
 }
