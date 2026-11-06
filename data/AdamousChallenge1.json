@@ -28,5 +28,15 @@
             "percent": 100,
             "hz": 120
         }
-    ]
+    ],
+    "difficulty": "Harder",
+    "tags": [
+        "Dash",
+        "Orbs",
+        "Timings",
+        "Ship",
+        "Cube",
+        "Potential"
+    ],
+    "description": "A challenge made for the player Adamous..."
 }
