@@ -16,5 +16,12 @@
             "percent": 100,
             "hz": 240
         }
+    ],
+    "difficulty": "Medium Demon",
+    "tags": [
+        "Ship",
+        "Wave",
+        "2.2",
+        "Long"
     ]
 }
