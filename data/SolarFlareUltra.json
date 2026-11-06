@@ -2,10 +2,20 @@
     "id": 141108560,
     "name": "Solar Flare Ultra",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [],
+    "difficulty": "Hard Demon",
+    "tags": [
+        "Hitboxes",
+        "Deco",
+        "Long",
+        "Wave",
+        "Dual"
+    ]
 }
