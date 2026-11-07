@@ -2,10 +2,21 @@
     "id": 147077861,
     "name": "Silent UltraKnown",
     "author": "LT8wrage",
-    "creators": ["PristineFly"],
+    "creators": [
+        "PristineFly"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
     "password": "",
-    "records": []
+    "records": [],
+    "difficulty": "Medium Demon",
+    "tags": [
+        "Deco",
+        "Wave",
+        "Ship",
+        "Drop",
+        "Cube",
+        "Nerve Control"
+    ]
 }
