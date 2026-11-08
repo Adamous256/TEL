@@ -10,5 +10,12 @@
     "verification": "https://youtu.be/0sn116FaEtY",
     "percentToQualify": 100,
     "password": "-",
-    "records": []
+    "records": [
+        {
+            "user": "LT8wrage",
+            "link": "https://youtu.be/NG5MHi95uFo",
+            "percent": 100,
+            "hz": 144
+        }
+    ]
 }
