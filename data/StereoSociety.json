@@ -2,7 +2,9 @@
     "id": 145697332,
     "name": "Stereo Society",
     "author": "LT8wrage",
-    "creators": ["LT8wrage"],
+    "creators": [
+        "LT8wrage"
+    ],
     "verifier": "LT8wrage",
     "verification": "",
     "percentToQualify": 100,
@@ -14,5 +16,6 @@
             "percent": 100,
             "hz": 240
         }
-    ]
+    ],
+    "difficulty": "Easy Demon"
 }
