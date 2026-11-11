@@ -9,7 +9,14 @@
     "verification": "https://youtu.be/hJLStJCwmjk?si=S0NKAo-UwTyOW736 hers the vid",
     "percentToQualify": 100,
     "password": "",
-    "records": [],
+    "records": [
+        {
+            "user": "arcticreacho7",
+            "link": "https://youtu.be/EN2N1as390U",
+            "percent": 100,
+            "hz": 60
+        }
+    ],
     "difficulty": "Medium Demon",
     "tags": [
         "Wave",
