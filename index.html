@@ -319,7 +319,7 @@ $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dat
 addEventListener("hashchange",route);
 route();loadData().then(()=>{renderRows();renderDetail();renderLB();initRoulette()});
  /* ===== Player profile =====
-   Paste this at the END of the main <script> in index.html (just before </script>).
+   Paste this at the END of the main script block in index.html, after the last line of code.
    It adds a "Profile" button at the top right and a profile panel,
    built from the same LEVELS array that the list already uses. */
 (() => {
@@ -507,6 +507,7 @@ route();loadData().then(()=>{renderRows();renderDetail();renderLB();initRoulette
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
+
 </script>
 </body>
 </html>
