@@ -318,6 +318,195 @@ $("#q").addEventListener("input",renderRows);
 $("#theme").addEventListener("click",()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==="light"?"dark":"light"});
 addEventListener("hashchange",route);
 route();loadData().then(()=>{renderRows();renderDetail();renderLB();initRoulette()});
+ /* ===== Player profile =====
+   Paste this at the END of the main <script> in index.html (just before </script>).
+   It adds a "Profile" button at the top right and a profile panel,
+   built from the same LEVELS array that the list already uses. */
+(() => {
+  const VERIFIER_GETS_CREDIT = true; // true: verifying a level counts as beating it (points + beaten list)
+  const STORE_KEY = "tel_profile_name";
+
+  // ---------- helpers (falls back if the site's own helpers are missing) ----------
+  const h = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const key = (s) => String(s ?? "").trim().toLowerCase();
+  const pts = (r) => (typeof points === "function" ? points(r) : Math.max(1, Math.round(500 * Math.pow(0.96, r - 1))));
+  const icon = (d) => (typeof iconTag === "function" ? iconTag(d) : "");
+  const safeUrl = (u) => (/^https?:\/\//i.test(String(u || "")) ? u : "");
+  const getLevels = () => (typeof LEVELS !== "undefined" && Array.isArray(LEVELS) ? LEVELS : []);
+  const store = {
+    get: () => { try { return localStorage.getItem(STORE_KEY) || ""; } catch { return ""; } },
+    set: (v) => { try { localStorage.setItem(STORE_KEY, v); } catch {} },
+  };
+
+  // ---------- stats ----------
+  function buildPlayers() {
+    const players = new Map();
+    const get = (name) => {
+      const k = key(name);
+      if (!k) return null;
+      if (!players.has(k)) players.set(k, { name: String(name).trim(), beaten: [], verified: [], created: [], progress: [], points: 0 });
+      return players.get(k);
+    };
+
+    getLevels().forEach((l, i) => {
+      const rank = i + 1;
+      const value = pts(rank);
+      const need = Number(l.percentToQualify) || 100;
+
+      // best record per player on this level
+      const best = new Map();
+      (l.records || l.recs || []).forEach((r) => {
+        const name = r.user ?? r.player ?? r.name;
+        const pct = Number(r.percent ?? r.progress ?? 0);
+        const k = key(name);
+        if (k && (!best.has(k) || pct > best.get(k).pct)) best.set(k, { name, pct, link: r.link });
+      });
+      best.forEach((r) => {
+        const p = get(r.name);
+        if (r.pct >= need) p.beaten.push({ l, rank, value, link: r.link });
+        else p.progress.push({ l, rank, pct: r.pct, link: r.link });
+      });
+
+      String(l.verifier || "").split(",").forEach((v) => {
+        const p = get(v);
+        if (!p) return;
+        p.verified.push({ l, rank });
+        if (VERIFIER_GETS_CREDIT && !p.beaten.some((b) => b.l === l)) p.beaten.push({ l, rank, value, link: l.vurl, verified: true });
+      });
+
+      (l.creators || []).forEach((c) => {
+        const p = get(c);
+        if (p) p.created.push({ l, rank });
+      });
+    });
+
+    players.forEach((p) => {
+      p.points = p.beaten.reduce((sum, b) => sum + b.value, 0);
+      [p.beaten, p.verified, p.created, p.progress].forEach((list) => list.sort((a, b) => a.rank - b.rank));
+    });
+    return players;
+  }
+
+  // ---------- profile content ----------
+  function profileHtml(name) {
+    if (!getLevels().length) return `<p class="pf-empty">Levels are still loading. Try again in a moment.</p>`;
+    const players = buildPlayers();
+    const p = players.get(key(name));
+    if (!p) return `<p class="pf-empty">No records, verifications or levels found for "${h(name)}". Check the spelling.</p>`;
+
+    const ranked = [...players.values()].filter((x) => x.points > 0).sort((a, b) => b.points - a.points);
+    const pos = ranked.indexOf(p) + 1;
+    const hardest = p.beaten[0];
+    const stat = (v, label) => `<div class="pf-stat"><b>${v}</b><span>${label}</span></div>`;
+    const link = (u) => (safeUrl(u) ? `<a href="${h(u)}" target="_blank" rel="noopener noreferrer">Video</a>` : "");
+    const row = (x, meta) =>
+      `<li><span class="pf-rank">#${x.rank}</span>${icon(x.l.difficulty)}<span class="pf-lname">${h(x.l.name)}</span><span class="pf-meta">${meta}</span></li>`;
+    const section = (title, items, meta) =>
+      items.length ? `<h3>${title} (${items.length})</h3><ul class="pf-list">${items.map((x) => row(x, meta(x))).join("")}</ul>` : "";
+
+    return `
+      <h3 class="pf-name">${h(p.name)}</h3>
+      <div class="pf-stats">
+        ${stat(p.points, "Points")}
+        ${stat(pos ? "#" + pos : "-", `Rank of ${ranked.length} players`)}
+        ${stat(p.beaten.length, "Levels beaten")}
+        ${stat(p.verified.length, "Levels verified")}
+        ${stat(p.created.length, "Levels created")}
+        ${stat(hardest ? h(hardest.l.name) : "-", hardest ? `Hardest level (#${hardest.rank})` : "Hardest level")}
+      </div>
+      ${section("Levels beaten", p.beaten, (b) => `${b.value} pts ${b.verified ? "(verified)" : ""} ${link(b.link)}`)}
+      ${section("Levels verified", p.verified, () => "")}
+      ${section("Levels created", p.created, () => "")}
+      ${section("Progress", p.progress.filter((x) => !p.beaten.some((b) => b.l === x.l)), (x) => `${x.pct}% ${link(x.link)}`)}`;
+  }
+
+  // ---------- UI ----------
+  const css = `
+  #pf-open{position:fixed;top:12px;right:12px;z-index:900;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:#1b1c25;color:#fff;font:inherit;cursor:pointer}
+  #pf-open:hover{background:#262836}
+  #pf-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.6);display:flex;align-items:flex-start;justify-content:center;padding:5vh 12px;overflow:auto}
+  #pf-overlay[hidden]{display:none}
+  .pf-panel{position:relative;width:min(720px,100%);background:#15161d;color:#eee;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:22px}
+  .pf-panel h2{margin:0 0 14px;font-size:1.3rem}
+  .pf-panel h3{margin:18px 0 8px;font-size:1rem}
+  .pf-panel h3.pf-name{margin:4px 0 12px;font-size:1.25rem}
+  .pf-close{position:absolute;top:10px;right:12px;background:none;border:0;color:inherit;font-size:1.6rem;line-height:1;cursor:pointer}
+  .pf-form{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .pf-form input{flex:1 1 200px;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#0e0f14;color:inherit;font:inherit}
+  .pf-form button{padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:#262836;color:inherit;font:inherit;cursor:pointer}
+  .pf-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:8px}
+  .pf-stat{padding:10px 12px;border-left:3px solid #8a4dff;background:rgba(255,255,255,.04)}
+  .pf-stat b{display:block;font-size:1.3rem;overflow-wrap:anywhere}
+  .pf-stat span{font-size:.85rem;opacity:.7}
+  .pf-list{list-style:none;margin:0;padding:0}
+  .pf-list li{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+  .pf-list .dif{max-height:24px;width:auto}
+  .pf-rank{min-width:2.6em;opacity:.7}
+  .pf-lname{flex:1}
+  .pf-meta{opacity:.85;font-size:.9rem;white-space:nowrap}
+  .pf-meta a{color:#b894ff;margin-left:8px}
+  .pf-empty{opacity:.8}`;
+
+  const init = () => {
+    const style = document.createElement("style");
+    style.textContent = css;
+    document.head.appendChild(style);
+
+    const btn = document.createElement("button");
+    btn.id = "pf-open";
+    btn.type = "button";
+    btn.textContent = "Profile";
+
+    const overlay = document.createElement("div");
+    overlay.id = "pf-overlay";
+    overlay.hidden = true;
+    overlay.innerHTML = `
+      <div class="pf-panel" role="dialog" aria-modal="true" aria-label="Player profile">
+        <button class="pf-close" type="button" aria-label="Close">&times;</button>
+        <h2>Player profile</h2>
+        <form class="pf-form">
+          <input id="pf-name" list="pf-names" placeholder="Player name" autocomplete="off">
+          <datalist id="pf-names"></datalist>
+          <button type="submit">View</button>
+          <button type="button" id="pf-save">Save as me</button>
+        </form>
+        <div id="pf-body"></div>
+      </div>`;
+
+    const input = overlay.querySelector("#pf-name");
+    const body = overlay.querySelector("#pf-body");
+    const show = (name) => {
+      body.innerHTML = name.trim()
+        ? profileHtml(name)
+        : `<p class="pf-empty">Type your player name exactly as it appears in the records, then press View. "Save as me" opens your profile automatically next time.</p>`;
+    };
+    const open = () => {
+      const names = [...buildPlayers().values()].map((p) => p.name).sort((a, b) => a.localeCompare(b));
+      overlay.querySelector("#pf-names").innerHTML = names.map((n) => `<option value="${h(n)}">`).join("");
+      overlay.hidden = false;
+      input.value = store.get();
+      show(input.value);
+      input.focus();
+    };
+    const close = () => { overlay.hidden = true; btn.focus(); };
+
+    btn.addEventListener("click", open);
+    overlay.querySelector(".pf-close").addEventListener("click", close);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !overlay.hidden) close(); });
+    overlay.querySelector(".pf-form").addEventListener("submit", (e) => { e.preventDefault(); show(input.value); });
+    overlay.querySelector("#pf-save").addEventListener("click", () => {
+      if (!input.value.trim()) return;
+      store.set(input.value.trim());
+      show(input.value);
+    });
+
+    document.body.append(btn, overlay);
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+  else init();
+})();
 </script>
 </body>
 </html>
