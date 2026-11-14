@@ -11,6 +11,8 @@
 <style>
 :root{--bg:#141414;--panel:#1c1c1c;--row:#242424;--line:#333;--text:#f2f2f2;--dim:#9a9a9a;--accent:#1f4fc2;--gold:#ffc857}
 :root:not([data-theme="light"]) header{background:url("assets/banner.png") center/cover no-repeat var(--bg)}
+:root:not([data-theme="light"]){--bg:#0b1022;--panel:#111833;--row:#18224a;--line:#223166}
+:root:not([data-theme="light"]) body{background:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px) 0 0/60px 60px,linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px) 0 0/60px 60px,radial-gradient(1200px 500px at 50% -10%,#13245a 0%,transparent 70%),var(--bg);background-attachment:fixed}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%}
 body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
