@@ -39,6 +39,12 @@
             "link": "-",
             "percent": 100,
             "hz": 60
+        },
+        {
+            "user": "WokkeyGMD",
+            "link": "https://youtu.be/0ael2iM7L_A?si=iQUdfKnHhdGprLA5",
+            "percent": 100,
+            "hz": 60
         }
     ],
     "difficulty": "Easy Demon"
