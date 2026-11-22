@@ -21,6 +21,12 @@
             "link": "-",
             "percent": 100,
             "hz": 144
+        },
+        {
+            "user": "Arrow",
+            "link": "https://youtu.be/R7GdIJalevg",
+            "percent": 100,
+            "hz": 240
         }
     ],
     "difficulty": "Easy Demon"
