@@ -9,6 +9,13 @@
     "verification": "-",
     "percentToQualify": 100,
     "password": "-",
-    "records": [],
+    "records": [
+        {
+            "user": "Warman210",
+            "link": "-",
+            "percent": 100,
+            "hz": 60
+        }
+    ],
     "difficulty": "Easy Demon"
 }
