@@ -14,19 +14,22 @@
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 230
         },
         {
             "user": "WokkeyGMD",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 230
         },
         {
             "user": "n00by71",
             "link": "https://youtu.be/Z-sUoI4YEcE third victor",
             "percent": 100,
-            "hz": 120
+            "hz": 120,
+            "points": 230
         }
     ],
     "difficulty": "Hard Demon",
