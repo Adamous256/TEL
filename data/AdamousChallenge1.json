@@ -14,19 +14,22 @@
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 11
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 11
         },
         {
             "user": "n00by71",
             "link": "-",
             "percent": 100,
-            "hz": 120
+            "hz": 120,
+            "points": 11
         }
     ],
     "difficulty": "Harder",
