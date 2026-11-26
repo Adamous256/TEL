@@ -15,19 +15,22 @@
             "user": "Adamous256",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 4
         },
         {
             "user": "peole750",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 4
         },
         {
             "user": "WokkeyGMD",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 4
         }
     ]
 }
