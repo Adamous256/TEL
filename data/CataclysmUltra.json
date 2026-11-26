@@ -14,7 +14,8 @@
             "user": "Recognition",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 83
         }
     ],
     "difficulty": "Medium Demon",
