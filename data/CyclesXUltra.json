@@ -14,13 +14,15 @@
             "user": "WokkeyGMD",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 18
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 18
         }
     ],
     "difficulty": "Insane"
