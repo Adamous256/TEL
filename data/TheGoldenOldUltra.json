@@ -14,13 +14,15 @@
             "user": "Adamous256",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 130
         },
         {
             "user": "arcticreacho7",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 130
         }
     ],
     "difficulty": "Medium Demon",
