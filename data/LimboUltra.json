@@ -15,25 +15,29 @@
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 73
         },
         {
             "user": "Arrow",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 73
         },
         {
             "user": "Adamous256",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 73
         },
         {
             "user": "arcticreacho7",
             "link": "https://youtu.be/BXj404t7KSw",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 73
         }
     ]
 }
