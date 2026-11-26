@@ -14,31 +14,36 @@
             "user": "AzzerxGD",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "Recognition",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "Larpdy",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "Fliyo",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         }
     ],
     "difficulty": "Easy",
