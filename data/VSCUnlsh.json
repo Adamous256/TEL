@@ -14,43 +14,50 @@
             "user": "PristineFly",
             "link": "-",
             "percent": 100,
-            "hz": 165
+            "hz": 165,
+            "points": 21
         },
         {
             "user": "ShabangGd",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 21
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 21
         },
         {
             "user": "WokkeyGMD",
             "link": "https://youtu.be/Apcg65JpzXA?si=yxkdMh1LBCTxHH6B",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 21
         },
         {
             "user": "arcticreacho7",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 21
         },
         {
             "user": "Fliyo",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 21
         },
         {
             "user": "Arrow",
             "link": "-",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 21
         }
     ],
     "difficulty": "Easy Demon"
