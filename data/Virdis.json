@@ -15,13 +15,15 @@
             "user": "WokkeyGMD",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 8
         },
         {
             "user": "arcticreacho7",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 8
         }
     ]
 }
