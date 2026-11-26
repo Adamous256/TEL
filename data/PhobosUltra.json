@@ -14,13 +14,15 @@
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 10
         },
         {
             "user": "n00by71",
             "link": "-",
             "percent": 100,
-            "hz": 120
+            "hz": 120,
+            "points": 10
         }
     ],
     "difficulty": "Harder",
