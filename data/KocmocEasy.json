@@ -14,13 +14,15 @@
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 159
         },
         {
             "user": "Arrow",
             "link": "https://youtu.be/I_q3kL4hluI",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 159
         }
     ],
     "difficulty": "Hard Demon",
