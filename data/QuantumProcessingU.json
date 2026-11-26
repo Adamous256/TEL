@@ -14,13 +14,15 @@
             "user": "Recognition",
             "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
             "percent": 100,
-            "hz": 144
+            "hz": 144,
+            "points": 86
         },
         {
             "user": "ihsaangd",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 86
         }
     ],
     "difficulty": "Medium Demon",
