@@ -14,25 +14,29 @@
             "user": "PristineFly",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 165
+            "hz": 165,
+            "points": 55
         },
         {
             "user": "arcticreacho7",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 55
         },
         {
             "user": "ihsaangd",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 55
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 55
         }
     ],
     "difficulty": "Easy Demon"
