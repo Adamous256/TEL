@@ -14,13 +14,15 @@
             "user": "arcticreacho7",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 7
         },
         {
             "user": "Warman210",
             "link": "-",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 7
         }
     ],
     "difficulty": "Harder",
