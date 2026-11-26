@@ -14,13 +14,15 @@
             "user": "Recognition",
             "link": "-",
             "percent": 100,
-            "hz": 144
+            "hz": 144,
+            "points": 408
         },
         {
             "user": "Adamous256",
             "link": "https://youtu.be/JOvTiAav5Pw",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 408
         }
     ],
     "difficulty": "Insane Demon",
