@@ -14,19 +14,22 @@
             "user": "AzzerxGD",
             "link": "https://www.youtube.com/watch?v=yyyyyyyyyyy",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 30
         },
         {
             "user": "Recognition",
             "link": "-",
             "percent": 100,
-            "hz": 144
+            "hz": 144,
+            "points": 30
         },
         {
             "user": "Arrow",
             "link": "https://youtu.be/R7GdIJalevg",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 30
         }
     ],
     "difficulty": "Easy Demon"
