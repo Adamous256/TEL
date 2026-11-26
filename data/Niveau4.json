@@ -14,13 +14,15 @@
             "user": "Recognition",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 144
+            "hz": 144,
+            "points": 361
         },
         {
             "user": "WokkeyGMD",
             "link": "https://youtu.be/ltEnlNYXq3E",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 361
         }
     ],
     "difficulty": "Insane Demon",
