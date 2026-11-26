@@ -14,31 +14,36 @@
             "user": "Adamous256",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 5
         },
         {
             "user": "Recognition",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 240
+            "hz": 240,
+            "points": 5
         },
         {
             "user": "AzzerxGD",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "Warman210",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 60
+            "hz": 60,
+            "points": 5
         },
         {
             "user": "PristineFly",
             "link": "https://www.youtube.com/watch?v=xxxxxxxxxxx",
             "percent": 100,
-            "hz": 165
+            "hz": 165,
+            "points": 5
         }
     ],
     "difficulty": "Hard",
